@@ -1,1 +1,1 @@
-# ssh-multitunnel
+# ssh_multitunnel
