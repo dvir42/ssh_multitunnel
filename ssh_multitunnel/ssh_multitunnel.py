@@ -1,4 +1,5 @@
 import pexpect
+from contextlib import contextmanager
 
 from .station import Station
 
@@ -26,6 +27,7 @@ def build_command(stations: [Station], local_bind_port):
     return command
 
 
+@contextmanager
 def tunnel(stations: [Station], local_bind_port, logfile=None):
     command = build_command(stations, local_bind_port)
     tunnel_process = pexpect.spawn(command, logfile=logfile, timeout=None, encoding='utf-8')
@@ -37,4 +39,5 @@ def tunnel(stations: [Station], local_bind_port, logfile=None):
             tunnel_process.sendline(station.password)
         elif prompt == 0 or prompt == 1:
             tunnel_process.sendline(station.password)
-    return tunnel_process
+    yield tunnel_process
+    tunnel_process.close()
