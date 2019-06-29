@@ -26,7 +26,9 @@ with tunnel(
 ```
 
 This will create a tunnel using the following command:
-```
-ssh -t -L 9999:localhost:7777 user@host1 -p 22 ssh -t -L 7777:localhost:8888 root@host2 -p 22 ssh -D 8888 -N bla@host3 -p 2222 
+```bash
+ssh -t -L 9999:localhost:7777 user@host1 -p 22\
+ ssh -t -L 7777:localhost:8888 root@host2 -p 22\
+  ssh -D 8888 -N bla@host3 -p 2222 
 ```
 The tunnel can be used with `proxychains wget google.com` (with proxychains configured to proxy through port 9999)
